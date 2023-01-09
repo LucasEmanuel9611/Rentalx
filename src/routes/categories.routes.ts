@@ -11,3 +11,9 @@ categoriesRoutes.post("/categories", (req, res) => {
 
   return res.status(201).send();
 });
+
+categoriesRoutes.get("/categories", (req, res) => {
+  const all = categoriesRepositories.list();
+
+  return res.status(200).json({ all });
+});
