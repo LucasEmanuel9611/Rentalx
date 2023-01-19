@@ -1,11 +1,9 @@
-import {
-  CategoriesRepository,
-  CreateCategoryDTO,
-} from "../repositories/CategoriesRepository";
+import { CategoriesRepository } from "../modules/cars/repositories/CategoriesRepository";
+import { ICreateCategoryDTO } from "../modules/cars/repositories/ICategoriesRepository";
 
 export class CreateCategoryService {
   constructor(private categoriesRepository: CategoriesRepository) {}
-  execute({ description, name }: CreateCategoryDTO): void {
+  execute({ description, name }: ICreateCategoryDTO): void {
     const categoryAlreadyExists = this.categoriesRepository.findByName(name);
 
     if (categoryAlreadyExists) {
