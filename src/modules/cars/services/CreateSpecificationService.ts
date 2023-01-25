@@ -1,16 +1,18 @@
 import {
-  ICategoriesRepository,
-  ICreateCategoryDTO,
-} from "../modules/cars/repositories/ICategoriesRepository";
-export class CreateSpecificationService {
-  constructor(private categoriesRepository: ICategoriesRepository) {}
-  execute({ description, name }: ICreateCategoryDTO): void {
-    const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+  ICreateSpecificationDTO,
+  ISpecificationRepository,
+} from "../repositories/ISpecificationRepository";
 
-    if (categoryAlreadyExists) {
+export class CreateSpecificationService {
+  constructor(private specificationRepository: ISpecificationRepository) {}
+  execute({ description, name }: ICreateSpecificationDTO): void {
+    const specificationAlreadyExists =
+      this.specificationRepository.findByName(name);
+
+    if (specificationAlreadyExists) {
       throw new Error("Category Alredy Exists");
     }
 
-    this.categoriesRepository.create({ name, description });
+    this.specificationRepository.create({ name, description });
   }
 }

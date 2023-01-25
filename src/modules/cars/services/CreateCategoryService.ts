@@ -1,5 +1,5 @@
-import { CategoriesRepository } from "../modules/cars/repositories/CategoriesRepository";
-import { ICreateCategoryDTO } from "../modules/cars/repositories/ICategoriesRepository";
+import { CategoriesRepository } from "../repositories/CategoriesRepository";
+import { ICreateCategoryDTO } from "../repositories/ICategoriesRepository";
 
 export class CreateCategoryService {
   constructor(private categoriesRepository: CategoriesRepository) {}
