@@ -1,10 +1,9 @@
-import { CategoriesRepository } from "../repositories/CategoriesRepository";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from "../repositories/ICategoriesRepository";
+} from "../../repositories/ICategoriesRepository";
 
-export class CreateCategoryService {
+export class CreateCategoryUseCase {
   constructor(private categoriesRepository: ICategoriesRepository) {}
   execute({ description, name }: ICreateCategoryDTO): void {
     const categoryAlreadyExists = this.categoriesRepository.findByName(name);
