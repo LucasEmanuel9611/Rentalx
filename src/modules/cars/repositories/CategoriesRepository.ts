@@ -7,11 +7,20 @@ import {
 export class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
-  constructor() {
+  private static INSTANCE: CategoriesRepository;
+
+  private constructor() {
     this.categories = [];
   }
 
-  create({ description, name }: ICreateCategoryDTO): void {
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    }
+    return CategoriesRepository.INSTANCE;
+  }
+
+  create({ name, description }: ICreateCategoryDTO): void {
     const category = new Category();
 
     Object.assign(category, {
@@ -27,8 +36,9 @@ export class CategoriesRepository implements ICategoriesRepository {
     return this.categories;
   }
 
-  findByName(name: string): Category {
+  findByName(name: string) {
     const category = this.categories.find((category) => category.name === name);
+
     return category;
   }
 }
