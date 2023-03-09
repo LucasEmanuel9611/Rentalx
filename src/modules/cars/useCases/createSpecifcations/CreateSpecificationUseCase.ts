@@ -1,9 +1,9 @@
 import {
   ICreateSpecificationDTO,
   ISpecificationRepository,
-} from "../repositories/ISpecificationRepository";
+} from "../../repositories/ISpecificationRepository";
 
-export class CreateSpecificationService {
+export class CreateSpecificationUseCase {
   constructor(private specificationRepository: ISpecificationRepository) {}
   execute({ description, name }: ICreateSpecificationDTO): void {
     const specificationAlreadyExists =
