@@ -32,6 +32,10 @@ export class SpecificationsRepository implements ISpecificationRepository {
     this.specifications.push(specification);
   }
 
+  list(): Specification[] {
+    return this.specifications;
+  }
+
   findByName(name: string) {
     const specification = this.specifications.find(
       (specification) => specification.name === name
