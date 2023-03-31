@@ -3,20 +3,14 @@
 Data transfer object
 para que as rotas não tenham conheçam todos os dados usamos DTO
 
-## Criação de repositório
-
-É importante manter um único lugar para criação de repositório
-ex: const categoriesRepositories = new CategoriesRepository();
-por exemplo nas rotas
-
 ### routes
 
     arquivos que recebem requisições http e utilizam services para
-    respectivaas ações
+    respectivas ações
 
-### services
+## Docker
 
-    arquivos que chamam funções de manipulação de dados e  fazem validações
+Meu Dockerfile tem uma imagem personalizada da aplicaćão, o docker-compose usa minha imagem personalizada da aplicaćão e uma imagem oficial do postgres
 
 ## Uso de Principios SOLID
 
