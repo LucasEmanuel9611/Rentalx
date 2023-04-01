@@ -5,8 +5,10 @@ import {
 
 export class CreateCategoryUseCase {
   constructor(private categoriesRepository: ICategoriesRepository) {}
-  execute({ description, name }: ICreateCategoryDTO): void {
-    const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+  async execute({ description, name }: ICreateCategoryDTO): Promise<void> {
+    const categoryAlreadyExists = await this.categoriesRepository.findByName(
+      name
+    );
 
     if (categoryAlreadyExists) {
       throw new Error("Category Alredy Exists");
