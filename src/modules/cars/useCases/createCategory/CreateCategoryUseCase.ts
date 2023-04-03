@@ -7,7 +7,7 @@ import {
 @injectable()
 export class CreateCategoryUseCase {
   constructor(
-    @inject("CategoriesRepository")
+    @inject("CategoryRepository")
     private categoriesRepository: ICategoriesRepository
   ) {}
   async execute({ description, name }: ICreateCategoryDTO): Promise<void> {
