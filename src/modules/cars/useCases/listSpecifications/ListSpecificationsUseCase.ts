@@ -8,8 +8,8 @@ export class ListSpecificationsUseCase {
     @inject("SpecificationRepository")
     private specificationRepository: SpecificationsRepository
   ) {}
-  execute(): Specification[] {
-    const specifications = this.specificationRepository.list();
+  async execute(): Promise<Specification[]> {
+    const specifications = await this.specificationRepository.list();
 
     return specifications;
   }
