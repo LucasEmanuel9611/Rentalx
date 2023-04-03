@@ -12,7 +12,6 @@ specificationsRoutes.post(
   createSpecificationController.handle
 );
 
-specificationsRoutes.get(
-  "/specifications",
-  listSpecificationsController.handle
-);
+specificationsRoutes.get("/specifications", (_, res) => {
+  return listSpecificationsController.handle(res);
+});
