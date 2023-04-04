@@ -16,12 +16,6 @@ export class CreateUserUseCase {
     password,
     driver_license,
   }: ICreateUserDTO): Promise<void> {
-    // const userAlreadyExists = await this.usersRepository.find();
-
-    // if (userAlreadyExists) {
-    //   throw new Error("User already exists!");
-    // }
-
     await this.usersRepository.create({
       name,
       username,

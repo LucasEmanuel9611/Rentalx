@@ -25,6 +25,6 @@ export class UsersRepository implements IUsersRepository {
       email,
     });
 
-    throw new Error("Method not implemented.");
+    await this.repository.save(user);
   }
 }
