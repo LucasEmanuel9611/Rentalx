@@ -7,11 +7,8 @@ export const specificationsRoutes = Router();
 const createSpecificationController = new CreateSpecificationController();
 const listSpecificationsController = new ListSpecificationsController();
 
-specificationsRoutes.post(
-  "/specifications",
-  createSpecificationController.handle
-);
+specificationsRoutes.post("/", createSpecificationController.handle);
 
-specificationsRoutes.get("/specifications", (_, res) => {
+specificationsRoutes.get("/", (_, res) => {
   return listSpecificationsController.handle(res);
 });

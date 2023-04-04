@@ -14,14 +14,14 @@ const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
 const importCategoriesController = new ImportCategoryController();
 
-categoriesRoutes.post("/categories", createCategoryController.handle);
+categoriesRoutes.post("/", createCategoryController.handle);
 
-categoriesRoutes.get("/categories", (_, res) => {
+categoriesRoutes.get("/", (_, res) => {
   return listCategoriesController.handle(res);
 });
 
 categoriesRoutes.post(
-  "/categories/import",
+  "/import",
   upload.single("file"),
   importCategoriesController.handle
 );
