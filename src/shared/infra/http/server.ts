@@ -2,13 +2,13 @@ import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import "reflect-metadata";
 import swaggerUi from "swagger-ui-express";
+import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
-import swaggerFile from "./swagger.json";
 
-import "./database";
+import "@shared/infra/typeorm";
 
-import { AppError } from "./errors/AppError";
-import "./shared/container";
+import { AppError } from "@shared/errors/AppError";
+import "../../container";
 
 const app = express();
 const port = 3333;
