@@ -4,7 +4,7 @@ import { ListCategoriesController } from "@modules/cars/useCases/listCategories/
 import { Router } from "express";
 import multer from "multer";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
-import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import { ensureAuthenticated } from "../middlewares/middleware";
 
 export const categoriesRoutes = Router();
 
