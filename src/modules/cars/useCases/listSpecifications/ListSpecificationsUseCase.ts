@@ -1,6 +1,6 @@
 import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import { inject, injectable } from "tsyringe";
-import { SpecificationsRepository } from "../../infra/typeorm/respositories/SpecificationRepository";
+import { SpecificationsRepository } from "../../infra/typeorm/repositories/SpecificationRepository";
 
 @injectable()
 export class ListSpecificationsUseCase {
