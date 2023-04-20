@@ -6,7 +6,7 @@ export class CarImage {
   car_id: string;
 
   @Column()
-  specification_id: string;
+  image_name: string;
 
   @CreateDateColumn()
   created_at: Date;
