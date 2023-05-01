@@ -1,6 +1,8 @@
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
+import { container } from "tsyringe";
+import { DayjsDateProvider } from "./implementations";
+import { IDateProvider } from "./implementations/IDateProviders";
 
-dayjs.extend(utc);
-
-export default dayjs;
+container.registerSingleton<IDateProvider>(
+  "DayjsDateProvider",
+  DayjsDateProvider
+);

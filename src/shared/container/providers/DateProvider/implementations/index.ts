@@ -1,4 +1,4 @@
-import dayjs from "..";
+import dayjs from "../dayjs.config";
 import { IDateProvider } from "./IDateProviders";
 
 export class DayjsDateProvider implements IDateProvider {
