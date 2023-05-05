@@ -1,5 +1,5 @@
 import dayjs from "../dayjs.config";
-import { IDateProvider } from "./IDateProviders";
+import { IDateProvider } from "./IDateProvider";
 
 export class DayjsDateProvider implements IDateProvider {
   compareInHours(start_date: Date, end_date: Date): number {

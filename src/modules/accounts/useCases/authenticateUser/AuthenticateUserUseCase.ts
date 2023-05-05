@@ -1,7 +1,7 @@
 import auth from "@config/auth";
 import { IUsersRepository } from "@modules/accounts/repositories/IUserRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUserTokensRepository";
-import { IDateProvider } from "@shared/container/providers/DateProvider/implementations/IDateProviders";
+import { IDateProvider } from "@shared/container/providers/DateProvider/implementations/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
