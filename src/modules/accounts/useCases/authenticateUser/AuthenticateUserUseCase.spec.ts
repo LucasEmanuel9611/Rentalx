@@ -1,30 +1,40 @@
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { AppError } from "@shared/errors/AppError";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { UsersRepositoryInMemory } from "../../repositories/implementations/UsersRepositoryInMemory";
+
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
+import { UsersRepositoryInMemory } from "@modules/accounts/repositories/implementations/UsersRepositoryInMemory";
+import { UsersTokensRepositoryInMemory } from "@modules/accounts/repositories/implementations/UserTokensRepositoryInMemory";
+import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations";
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepositoryInMemory: UsersRepositoryInMemory;
+let userTokensRepositoryInMemory: UsersTokensRepositoryInMemory;
+let dateProvider: DayjsDateProvider;
+
 let createUserUseCase: CreateUserUseCase;
 
 describe("Authenticate User", () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
+    userTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
+    dateProvider = new DayjsDateProvider();
+
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      usersRepositoryInMemory
+      usersRepositoryInMemory,
+      userTokensRepositoryInMemory,
+      dateProvider
     );
     createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
   it("should be able to authenticate an user", async () => {
     const user: ICreateUserDTO = {
-      name: "User Test",
-      email: "test@email.com",
-      driver_license: "123456",
+      driver_license: "000123",
+      email: "user@test.com",
       password: "1234",
+      name: "User Test",
     };
-
     await createUserUseCase.execute(user);
 
     const result = await authenticateUserUseCase.execute({
@@ -38,18 +48,18 @@ describe("Authenticate User", () => {
   it("should not be able to authenticate an nonexistent user", async () => {
     await expect(
       authenticateUserUseCase.execute({
-        email: "false email",
-        password: "000000",
+        email: "false@email.com",
+        password: "1234",
       })
     ).rejects.toEqual(new AppError("Email or password incorrect!"));
   });
 
-  it("should be able to authenticate an user with incorrect password", async () => {
+  it("should not be able to authenticate with incorrect password", async () => {
     const user: ICreateUserDTO = {
-      name: "User Test",
-      email: "",
-      driver_license: "87878787",
+      driver_license: "9999",
+      email: "user@user.com",
       password: "1234",
+      name: "User Test Error",
     };
 
     await createUserUseCase.execute(user);
@@ -57,7 +67,7 @@ describe("Authenticate User", () => {
     await expect(
       authenticateUserUseCase.execute({
         email: user.email,
-        password: "incorrect password",
+        password: "incorrectPassword",
       })
     ).rejects.toEqual(new AppError("Email or password incorrect!"));
   });
