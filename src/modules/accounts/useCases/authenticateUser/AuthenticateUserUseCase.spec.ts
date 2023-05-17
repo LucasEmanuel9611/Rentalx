@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { AppError } from "@shared/errors/AppError";
 
