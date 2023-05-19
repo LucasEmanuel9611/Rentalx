@@ -3,7 +3,6 @@ import { verify } from "jsonwebtoken";
 
 import auth from "@config/auth";
 import { AppError } from "@shared/errors/AppError";
-import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 
 interface IPayload {
   sub: string;

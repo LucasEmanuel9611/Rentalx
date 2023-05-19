@@ -1,6 +1,6 @@
 import { CreateSpecificationController } from "@modules/cars/useCases/createSpecifcations/CreateSpecificationController";
 import { ListSpecificationsController } from "@modules/cars/useCases/listSpecifications/ListSpecificationsController";
-import { ensureAuthenticated } from "@shared/infra/http/middlewares/middleware";
+import { ensureAuthenticated } from "@shared/infra/http/middlewares/ensureAuthenticated";
 import { Router } from "express";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
 

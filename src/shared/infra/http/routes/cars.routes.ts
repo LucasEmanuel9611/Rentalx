@@ -6,7 +6,7 @@ import { UploadCarImageController } from "@modules/cars/useCases/uploadCarImages
 import { Router } from "express";
 import multer from "multer";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
-import { ensureAuthenticated } from "../middlewares/middleware";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 export const carsRoutes = Router();
 const upload = multer(uploadConfig);
