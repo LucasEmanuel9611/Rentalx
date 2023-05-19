@@ -8,13 +8,15 @@ import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
 
 import createConnection from "@shared/infra/typeorm";
-
 import { AppError } from "@shared/errors/AppError";
 import "../../container";
+import rateLimiter from "./middlewares/rateLimiter";
 
 createConnection();
 const app = express();
 const port = 3333;
+
+app.use(rateLimiter);
 
 app.use(express.json());
 app.use(cors());
