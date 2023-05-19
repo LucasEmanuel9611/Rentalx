@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import * as Sentry from "@sentry/node";
 import "express-async-errors";
 import "reflect-metadata";
 import "dotenv/config";
@@ -18,9 +19,26 @@ const port = 3333;
 
 app.use(rateLimiter);
 
+Sentry.init({
+  dsn: process.env.SENTRY_URL,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Sentry.Integrations.Express({ app }),
+    ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+  ],
+
+  tracesSampleRate: 1.0,
+});
+
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
+
 app.use(express.json());
 app.use(cors());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
+
+app.use(Sentry.Handlers.errorHandler());
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof AppError) {
@@ -34,7 +52,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     message: `Internal Server Error - ${err.message}`,
   });
 });
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 export { app, port };
