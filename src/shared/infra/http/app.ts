@@ -12,6 +12,7 @@ import createConnection from "@shared/infra/typeorm";
 import { AppError } from "@shared/errors/AppError";
 import "../../container";
 import rateLimiter from "./middlewares/rateLimiter";
+import upload from "@config/upload";
 
 createConnection();
 const app = express();
@@ -20,7 +21,7 @@ const port = 3333;
 app.use(rateLimiter);
 
 Sentry.init({
-  dsn: process.env.SENTRY_URL,
+  dsn: process.env.SENTRY_DSN,
   integrations: [
     new Sentry.Integrations.Http({ tracing: true }),
     new Sentry.Integrations.Express({ app }),
@@ -30,12 +31,19 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+console.log(process.env.SENTRY_DSN);
+
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 app.use(express.json());
-app.use(cors());
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use("/avatar", express.static(`${upload.tmpFolder}/avatar`));
+app.use("/cars", express.static(`${upload.tmpFolder}/cars`));
+
+app.use(cors());
 app.use(router);
 
 app.use(Sentry.Handlers.errorHandler());
