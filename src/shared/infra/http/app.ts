@@ -31,8 +31,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-console.log(process.env.SENTRY_DSN);
-
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
